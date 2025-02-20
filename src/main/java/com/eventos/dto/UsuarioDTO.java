@@ -2,6 +2,8 @@ package com.eventos.dto;
 
 
 
+import com.eventos.models.Usuario;
+
 import java.util.Date;
 
 public class UsuarioDTO {
@@ -13,6 +15,19 @@ public class UsuarioDTO {
     private Date dataNascimento;
     private String perfil;
     private Boolean  Verificado;
+
+    public UsuarioDTO(Usuario usuario) {
+        this.id = usuario.getId();
+        this.nome = usuario.getNome();
+        this.email = usuario.getEmail();
+        this.senha = usuario.getSenha();
+        this.cpf = usuario.getCpf();
+        this.dataNascimento = usuario.getDataNascimento();
+        this.perfil = usuario.getPerfil();
+        this.Verificado = usuario.getVerificado();
+    }
+    public  UsuarioDTO() {
+    }
 
     public Long getId() {
         return id;
