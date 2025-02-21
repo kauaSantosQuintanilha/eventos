@@ -46,4 +46,7 @@ public class UsuarioServices {
         usuarioDTO.setVerificado(usuario.getVerificado());
         return usuarioDTO;
     }
+    public Usuario buscarUsuarioPorId(Long id) {
+        return usuarioRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+    }
 }

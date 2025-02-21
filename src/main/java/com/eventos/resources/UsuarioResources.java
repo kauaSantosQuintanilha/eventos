@@ -1,6 +1,7 @@
 package com.eventos.resources;
 
 import com.eventos.dto.UsuarioDTO;
+import com.eventos.models.Usuario;
 import com.eventos.services.UsuarioServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +13,10 @@ public class UsuarioResources {
 
    @Autowired
    private UsuarioServices usuarioServices;
-    @RequestMapping("/")
-    public String getUsuario() {
-        return "testar retorno dos usuarios";
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@PathVariable Long id) {
+        Usuario usuario = usuarioServices.buscarUsuarioPorId(id);
+        return  ResponseEntity.ok(usuarioServices.converterUsuarioParaUsuarioDTO(usuario));
     }
 
     @PostMapping("/")
