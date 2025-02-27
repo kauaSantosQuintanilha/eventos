@@ -4,12 +4,17 @@ import com.eventos.dto.UsuarioDTO;
 import com.eventos.models.Usuario;
 import com.eventos.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+import static java.util.Objects.isNull;
 
 @Service
 public class UsuarioServices {
+
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -17,7 +22,6 @@ public class UsuarioServices {
         Usuario usuario = converterUsuarioDTOParaUsuario(usuarioDTO);
         usuario = usuarioRepository.save(usuario);
         return converterUsuarioParaUsuarioDTO(usuario);
-
 
 
     }
@@ -34,6 +38,7 @@ public class UsuarioServices {
         usuario.setVerificado(usuarioDTO.getVerificado());
         return usuario;
     }
+
     public UsuarioDTO converterUsuarioParaUsuarioDTO(Usuario usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setId(usuario.getId());
@@ -46,7 +51,33 @@ public class UsuarioServices {
         usuarioDTO.setVerificado(usuario.getVerificado());
         return usuarioDTO;
     }
+
     public Usuario buscarUsuarioPorId(Long id) {
         return usuarioRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
     }
+
+    public Usuario buscarUsuarioPorEmail(String email) {
+        return usuarioRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+    }
+
+    public UsuarioDTO atualizarUsuario(UsuarioDTO usuarioDTO) {
+        if (isNull(usuarioDTO.getId())) {
+            throw new IllegalArgumentException("id não informado");
+
+        }
+        Usuario usuario = usuarioRepository.findById(usuarioDTO.getId())
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Usuário não encontrado"));
+        usuario = converterUsuarioDTOParaUsuario(usuarioDTO);
+        usuario = usuarioRepository.save(usuario);
+        return converterUsuarioParaUsuarioDTO(usuario);
+    }
+
+
+    public void deletarUsuario(Long id) {
+        usuarioRepository.deleteById(id);
+    }
 }
+
+
+

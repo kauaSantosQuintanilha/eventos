@@ -11,18 +11,37 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/usuarios")
 public class UsuarioResources {
 
-   @Autowired
-   private UsuarioServices usuarioServices;
+    @Autowired
+    private UsuarioServices UsuarioServices;
+
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@PathVariable Long id) {
-        Usuario usuario = usuarioServices.buscarUsuarioPorId(id);
-        return  ResponseEntity.ok(usuarioServices.converterUsuarioParaUsuarioDTO(usuario));
+        Usuario usuario = UsuarioServices.buscarUsuarioPorId(id);
+        return ResponseEntity.ok(UsuarioServices.converterUsuarioParaUsuarioDTO(usuario));
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<UsuarioDTO> buscarUsuarioPorEmail(@RequestParam String email) {
+        Usuario usuario = UsuarioServices.buscarUsuarioPorEmail(email);
+        return ResponseEntity.ok(UsuarioServices.converterUsuarioParaUsuarioDTO(usuario));
     }
 
     @PostMapping("/")
-    public ResponseEntity<UsuarioDTO>  criarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
-       usuarioDTO= usuarioServices.salvarUsuario(usuarioDTO);
+    public ResponseEntity<UsuarioDTO> criarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        usuarioDTO = UsuarioServices.salvarUsuario(usuarioDTO);
         return ResponseEntity.ok(usuarioDTO);
     }
-}
 
+    @PutMapping()
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        usuarioDTO = UsuarioServices.salvarUsuario(usuarioDTO);
+        return ResponseEntity.ok(usuarioDTO);
+    }
+
+    @DeleteMapping()
+    public ResponseEntity<Void> deletarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        UsuarioServices.deletarUsuario(usuarioDTO.getId());
+        return ResponseEntity.noContent().build();
+    }
+
+}
