@@ -2,9 +2,11 @@ package com.eventos.dto;
 
 
 
+import com.eventos.enums.Perfil;
 import com.eventos.models.Usuario;
 
 import java.util.Date;
+import java.util.List;
 
 public class UsuarioDTO {
     private Long id;
@@ -13,7 +15,7 @@ public class UsuarioDTO {
     private String senha;
     private String cpf;
     private Date dataNascimento;
-    private String perfil;
+    private List<Perfil>perfis;
     private Boolean  Verificado;
 
     public UsuarioDTO(Usuario usuario) {
@@ -23,7 +25,7 @@ public class UsuarioDTO {
         this.senha = usuario.getSenha();
         this.cpf = usuario.getCpf();
         this.dataNascimento = usuario.getDataNascimento();
-        this.perfil = usuario.getPerfil();
+        this.perfis = usuario.getPerfis();
         this.Verificado = usuario.getVerificado();
     }
     public  UsuarioDTO() {
@@ -77,12 +79,12 @@ public class UsuarioDTO {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getPerfil() {
-        return perfil;
+    public List<Perfil> getPerfis() {
+        return perfis;
     }
 
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
+    public void setPerfis(List<Perfil> perfis) {
+        this.perfis = perfis;
     }
 
     public Boolean getVerificado() {

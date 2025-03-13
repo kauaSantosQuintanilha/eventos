@@ -4,10 +4,8 @@ import com.eventos.dto.UsuarioDTO;
 import com.eventos.models.Usuario;
 import com.eventos.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 import static java.util.Objects.isNull;
 
@@ -34,7 +32,7 @@ public class UsuarioServices {
         usuario.setSenha(usuarioDTO.getSenha());
         usuario.setCpf(usuarioDTO.getCpf());
         usuario.setDataNascimento(usuarioDTO.getDataNascimento());
-        usuario.setPerfil(usuarioDTO.getPerfil());
+        usuario.setPerfis(usuarioDTO.getPerfis());
         usuario.setVerificado(usuarioDTO.getVerificado());
         return usuario;
     }
@@ -47,7 +45,7 @@ public class UsuarioServices {
         usuarioDTO.setSenha(usuario.getSenha());
         usuarioDTO.setCpf(usuario.getCpf());
         usuarioDTO.setDataNascimento(usuario.getDataNascimento());
-        usuarioDTO.setPerfil(usuario.getPerfil());
+        usuarioDTO.setPerfis(usuario.getPerfis());
         usuarioDTO.setVerificado(usuario.getVerificado());
         return usuarioDTO;
     }

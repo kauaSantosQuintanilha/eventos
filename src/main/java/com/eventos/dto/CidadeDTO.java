@@ -1,11 +1,13 @@
 package com.eventos.dto;
 
+import com.eventos.enums.Estado;
+
 public class CidadeDTO {
     private Long id;
 
     private String nome;
 
-    private String estado;
+    private Estado estado;
 
     public CidadeDTO() {
     }
@@ -26,11 +28,11 @@ public class CidadeDTO {
         this.nome = nome;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 }
