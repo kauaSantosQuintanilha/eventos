@@ -22,7 +22,7 @@ public class CidadeService {
 
     }
 
-    private CidadeDTO converterCidadeParaCidadeDTO(Cidade cidade) {
+    public CidadeDTO converterCidadeParaCidadeDTO(Cidade cidade) {
         CidadeDTO cidadeDTO = new CidadeDTO();
         cidadeDTO.setId(cidade.getId());
         cidadeDTO.setNome(cidade.getNome());
@@ -60,6 +60,16 @@ public class CidadeService {
 
     public void deletarCidade(Long id) {
         cidadeRepository.deleteById(id);
+    }
+
+    public CidadeDTO buscarCidadePorNome(String nome) {
+    return converterCidadeParaCidadeDTO(cidadeRepository.findByNome(nome).orElseThrow(() -> new IllegalArgumentException("Ciade não encontrado")));
+    }
+
+    public CidadeDTO atualizarCidade(CidadeDTO cidadeDTO) {
+        return converterCidadeParaCidadeDTO(cidadeRepository.findById(cidadeDTO.getId())
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Ciade não encontrado")));
     }
 }
 
